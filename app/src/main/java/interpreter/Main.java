@@ -6,6 +6,6 @@ public class Main
     {
         IO.println("Buan izuauau");
 
-        IO.print("sadasd");
+        IO.print("test");
     }
 }
