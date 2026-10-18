@@ -10,11 +10,11 @@ public record ArithExp(ArithOp op, IExp left, IExp right) implements IExp
     {
         if(!(left.eval(symTable) instanceof IntValue(int n1)))
         {
-            throw new ExpressionException("First operand is not an integer");
+            throw new ExpressionException("first operand is not an integer");
         }
         if(!(right.eval(symTable) instanceof IntValue(int n2)))
         {
-            throw new ExpressionException("Second operand is not an integer");
+            throw new ExpressionException("second operand is not an integer");
         }
 
         return switch(op)
@@ -26,11 +26,11 @@ public record ArithExp(ArithOp op, IExp left, IExp right) implements IExp
             {
                 if(n2 == 0)
                 {
-                    throw new ExpressionException("Division by zero");
+                    throw new ExpressionException("division by zero");
                     yield new IntValue(n1 / n2);
                 }
             }
-        }
+        };
     }
 
     @Override
@@ -38,6 +38,4 @@ public record ArithExp(ArithOp op, IExp left, IExp right) implements IExp
     {
         return "(" + left + " " + op + " " + right + ")";
     }
-
-    // TODO: ValueExp (returns its value), VarExp (looks the variable up), LogicOp + LogicExp (and, or – both operands must be booleans)
 }
