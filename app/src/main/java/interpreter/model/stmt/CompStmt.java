@@ -1,6 +1,8 @@
 package interpreter.model.stmt;
 
-public record CompStmt(IStmt first, IStmt second) implements Istmt
+import interpreter.model.PrgState;
+
+public record CompStmt(IStmt first, IStmt second) implements IStmt
 {
     @Override
     public PrgState execute(PrgState state)
