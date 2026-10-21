@@ -1,6 +1,8 @@
 package interpreter.model.adt;
 
+
 import interpreter.exceptions.ADTException;
+import interpreter.exceptions.MyException;
 
 import java.util.HashMap;
 
@@ -15,7 +17,7 @@ public class MyDictionary<K, V> implements IDictionary<K, V>
     }
 
     @Override
-    public V lookup(K key) throws ADTException
+    public V lookup(K key) throws MyException
     {
         if(!this.map.containsKey(key))
         {
@@ -32,7 +34,7 @@ public class MyDictionary<K, V> implements IDictionary<K, V>
     }
 
     @Override
-    public void update(K key, V newValue) throws ADTException
+    public void update(K key, V newValue) throws MyException
     {
         if(!this.map.containsKey(key))
         {

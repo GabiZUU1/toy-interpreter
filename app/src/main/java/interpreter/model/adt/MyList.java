@@ -1,6 +1,7 @@
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
+import interpreter.exceptions.MyException;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class MyList<T> implements IList<T>
     }
 
     @Override
-    public T get(int index) throws ADTException
+    public T get(int index) throws MyException
     {
         if(index < 0 || index >= this.list.size())
         {

@@ -21,6 +21,47 @@ public class PrgState
         this.originalProgram = program;
         exeStack.push(program);
     }
+
+    public IStack<IStmt> getExeStack()
+    {
+        return this.exeStack;
+    }
+
+    public void setExeStack(IStack<IStmt> newExeStack)
+    {
+        this.exeStack = newExeStack;
+    }
+
+    public IDictionary<String, IValue> getSymTable()
+    {
+        return this.symTable;
+    }
+
+    public void setSymTable(IDictionary<String, IValue> newSymTable)
+    {
+        this.symTable = newSymTable;
+    }
+
+    public IList<IValue> getOut()
+    {
+        return this.out;
+    }
+
+    public void setOut(IList<IValue> newOut)
+    {
+        this.out = newOut;
+    }
+
+    public IStmt getOriginalProgram()
+    {
+        return this.originalProgram;
+    }
+
+    @Override
+    public String toString()
+    {
+        return exeStack + " ||| " + symTable + " ||| " + out;
+    }
 }
 
 // PrgState state = new PrgState(MyStack<>(), new MyDictionary<>(), new MyList<>(), program);

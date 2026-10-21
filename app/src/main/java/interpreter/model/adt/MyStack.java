@@ -1,6 +1,7 @@
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
+import interpreter.exceptions.MyException;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -16,7 +17,7 @@ public class MyStack<T> implements IStack<T>
     }
 
     @Override
-    public T pop() throws ADTException
+    public T pop() throws MyException
     {
         if(stack.isEmpty())
         {
