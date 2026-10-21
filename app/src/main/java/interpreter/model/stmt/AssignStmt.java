@@ -32,8 +32,3 @@ public record AssignStmt(String id, IExp exp) implements IStmt
         return id + " = " + exp;
     }
 }
-
-// TODO: VarDeclStmt(String name, IType type) – S3
-// PrintStmt(IExp exp) – S4
-// IfStmt(IExp cond, IStmt thenS, IStmt elseS) – S5
-// NopStmt() – S6

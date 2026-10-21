@@ -38,7 +38,3 @@ public class MyStack<T> implements IStack<T>
         return stack.toString();
     }
 }
-
-// TODO: IDictionary<K, V> / MyDictionary<K, V>: isDefined, lookup, put, update
-// (wraps a HashMap)
-// IList<T> / MyList<T>: add, get, size (wraps an ArrayList)
