@@ -30,11 +30,11 @@ public class Controller
     public void allStep() throws MyException
     {
         PrgState prg = repo.getCrtPrg();
-        display(prg); // only if the display flag is on
+        /// display(prg); // only if the display flag is on
         while(!prg.getExeStack().isEmpty())
         {
             oneStep(prg);
-            display(prg);
+            /// display(prg);
         }
     }
 }

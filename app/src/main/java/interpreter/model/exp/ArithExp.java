@@ -30,8 +30,8 @@ public record ArithExp(ArithOp op, IExp left, IExp right) implements IExp
                 if(n2 == 0)
                 {
                     throw new ExpressionException("division by zero");
-                    yield new IntValue(n1 / n2);
                 }
+                yield new IntValue(n1 / n2);
             }
         };
     }
