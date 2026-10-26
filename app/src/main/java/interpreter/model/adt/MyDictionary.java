@@ -19,7 +19,7 @@ public class MyDictionary<K, V> implements IDictionary<K, V>
     @Override
     public V lookup(K key) throws MyException
     {
-        if(!this.map.containsKey(key))
+        if(!this.isDefined(key))
         {
             throw new ADTException("map does not contain key " + key);
         }

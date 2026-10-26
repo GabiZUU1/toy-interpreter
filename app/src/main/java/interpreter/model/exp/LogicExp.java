@@ -33,18 +33,3 @@ public record LogicExp(LogicOp op, IExp left, IExp right) implements IExp
         return "(" + left + " " + op + " " + right + ")";
     }
 }
-
-
-//S = CompStmt( decl a,
-//              CompStmt( decl b,
-//                        CompStmt( a = ArithExp(ADD,
-//                                               ValueExp(2),
-//                                               ArithExp(MUL,
-//                                                        ValueExp(3),
-//                                                        ValueExp(5))),
-//                                      CompStmt(b = ArithExp(ADD,
-//                                                            VarExp("a"),
-//                                                            ValueExp(1)),
-//                                               print(VarExp("b"))))
-//                                )
-//        )
