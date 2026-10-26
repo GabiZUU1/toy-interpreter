@@ -16,7 +16,7 @@ public class Main
     {
         PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), Examples.ex1);
         IRepository repo = new Repository(state);
-        Controller cont = new Controller(repo);
+        Controller cont = new Controller(repo, true);
         View ui = new View(cont);
 
         ui.start();

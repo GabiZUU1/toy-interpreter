@@ -60,7 +60,7 @@ public class PrgState
     @Override
     public String toString()
     {
-        return exeStack + " ||| " + symTable + " ||| " + out;
+        return exeStack + " | " + symTable + " | " + out;
     }
 }
 

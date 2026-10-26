@@ -6,13 +6,17 @@ import interpreter.model.PrgState;
 import interpreter.model.stmt.IStmt;
 import interpreter.repository.IRepository;
 
+import static java.lang.IO.println;
+
 public class Controller
 {
     IRepository repo;
+    private boolean displayFlag;
 
-    public Controller(IRepository repo)
+    public Controller(IRepository repo, boolean displayFlag)
     {
         this.repo = repo;
+        this.displayFlag = displayFlag;
     }
 
     public PrgState oneStep(PrgState state) throws MyException
@@ -30,11 +34,20 @@ public class Controller
     public void allStep() throws MyException
     {
         PrgState prg = repo.getCrtPrg();
-        /// display(prg); // only if the display flag is on
+        display(prg); // only if the display flag is on
         while(!prg.getExeStack().isEmpty())
         {
             oneStep(prg);
-            /// display(prg);
+            display(prg);
+        }
+    }
+
+    private void display(PrgState state)
+    {
+        if(this.displayFlag)
+        {
+            println("***************************************");
+            println(state);
         }
     }
 }

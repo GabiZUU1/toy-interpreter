@@ -1,7 +1,14 @@
 package interpreter.view;
 
 import interpreter.controller.Controller;
+import interpreter.exceptions.MyException;
+import interpreter.model.PrgState;
+import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyList;
+import interpreter.model.adt.MyStack;
 import interpreter.model.stmt.IStmt;
+import interpreter.repository.IRepository;
+import interpreter.repository.Repository;
 
 import java.util.Scanner;
 
@@ -11,7 +18,7 @@ import static java.lang.IO.println;
 public class View
 {
     private IStmt selected = Examples.ex1;
-    private final Controller controller;
+    private Controller controller;
     private final Scanner scanner;
 
     public View(Controller controller)
@@ -50,9 +57,10 @@ public class View
                     }
                     case 1 -> printSelectMenu();
                     case 2 -> printRunMenu();
+                    default -> this.printMessage("Not a valid option, try again!");
                 }
             }
-            catch (Exception e)
+            catch (MyException e)
             {
                 this.printMessage(e.getMessage());
             }
@@ -63,7 +71,7 @@ public class View
     {
         int o = -1;
 
-        while(o == -1)
+        while(o != 0)
         {
             println("--------------------------------------------");
             println("0: Go back");
@@ -78,17 +86,39 @@ public class View
             switch (o)
             {
                 case 0 -> {return;}
-                case 1 -> this.selected = Examples.ex1;
-                case 2 -> this.selected = Examples.ex2;
-                case 3 -> this.selected = Examples.ex3;
+                case 1 ->
+                {
+                    this.selected = setNewState(Examples.ex1);
+                    return;
+                }
+                case 2 ->
+                {
+                    this.selected = setNewState(Examples.ex2);
+                    return;
+                }
+                case 3 ->
+                {
+                    this.selected = setNewState(Examples.ex3);
+                    return;
+                }
                 default -> this.printMessage("Not a valid option, try again!");
             }
         }
     }
 
-    private void printRunMenu()
+    private void printRunMenu() throws MyException
     {
+        this.controller.allStep();
+    }
 
+    private IStmt setNewState(IStmt statement)
+    {
+        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), statement);
+        IRepository repo = new Repository(state);
+        Controller cont = new Controller(repo, true);
+        this.controller = cont;
+
+        return statement;
     }
 
     private int readInt()
@@ -101,7 +131,7 @@ public class View
             }
             catch (NumberFormatException e)
             {
-                this.printMessage(e.getMessage());
+                this.printMessage("Please enter a number!");
             }
         }
     }
@@ -109,7 +139,7 @@ public class View
     private void printMessage(String message)
     {
         println("-".repeat(message.length() + 6));
-        print("|\tmessage\t|\n");
+        print("|\t" + message + "\t|\n");
         println("-".repeat(message.length() + 6));
     }
 }
