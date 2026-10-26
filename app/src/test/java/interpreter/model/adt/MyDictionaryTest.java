@@ -31,7 +31,8 @@ public class MyDictionaryTest
     @Test
     void lookupThrows()
     {
-        assertThrows(ADTException.class, () -> this.dict.lookup("ok"));
+        var e = assertThrows(ADTException.class, () -> this.dict.lookup("ok"));
+        assertEquals("map does not contain key ok", e.getMessage());
     }
 
     @Test
@@ -52,7 +53,8 @@ public class MyDictionaryTest
     @Test
     void updateThrows()
     {
-        assertThrows(ADTException.class, () -> this.dict.update("asdaw", new IntValue(11)));
+        var e = assertThrows(ADTException.class, () -> this.dict.update("asdaw", new IntValue(11)));
+        assertEquals("map does not contain key asdaw", e.getMessage());
     }
 
     @Test
