@@ -1,18 +1,13 @@
 package interpreter.model.stmt;
 
-import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
-import interpreter.model.adt.IDictionary;
 import interpreter.model.adt.MyDictionary;
 import interpreter.model.adt.MyList;
 import interpreter.model.adt.MyStack;
-import interpreter.model.exp.ArithExp;
-import interpreter.model.exp.ArithOp;
 import interpreter.model.exp.ValueExp;
 import interpreter.model.exp.VarExp;
 import interpreter.model.value.BoolValue;
-import interpreter.model.value.IValue;
 import interpreter.model.value.IntValue;
 import interpreter.view.Examples;
 import static org.junit.jupiter.api.Assertions.*;
