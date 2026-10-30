@@ -75,9 +75,9 @@ public class View
         {
             println("--------------------------------------------");
             println("0: Go back");
-            println("1: int v; v = 2; print(v)");
-            println("2: int a; int b; a = 2 + 3 * 5; b = a + 1; print(b)");
-            println("3: bool a; int v; a = true; (if a then v = 2 else v = 3); print(v)");
+            println("1: " + Examples.ex1);
+            println("2: " + Examples.ex2);
+            println("3: " + Examples.ex3);
             println("--------------------------------------------");
             print("Choose an program: ");
 
