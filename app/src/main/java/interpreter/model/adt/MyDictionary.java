@@ -5,6 +5,7 @@ import interpreter.exceptions.ADTException;
 import interpreter.exceptions.MyException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyDictionary<K, V> implements IDictionary<K, V>
 {
@@ -42,6 +43,23 @@ public class MyDictionary<K, V> implements IDictionary<K, V>
         }
 
         this.map.replace(key, newValue);
+    }
+
+    @Override
+    public void remove(K key) throws MyException
+    {
+        if(!this.map.containsKey(key))
+        {
+            throw new ADTException("map does not contain key " + key);
+        }
+
+        this.map.remove(key);
+    }
+
+    @Override
+    public Map<K, V> toMap()
+    {
+        return Map.copyOf(this.map);
     }
 
     @Override

@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 public class MyDictionaryTest
 {
     private IDictionary<String, IValue> dict;
@@ -62,6 +64,26 @@ public class MyDictionaryTest
     {
         this.dict.update("nr", new IntValue(99));
         assertEquals(new IntValue(99), this.dict.lookup("nr"));
+    }
+
+    @Test
+    void removeThrows()
+    {
+        var e = assertThrows(ADTException.class, () -> this.dict.remove("p"));
+        assertEquals("map does not contain key p", e.getMessage());
+    }
+
+    @Test
+    void removeCorrect() throws MyException
+    {
+        this.dict.remove("nr");
+        assertFalse(this.dict.isDefined("nr"));
+    }
+
+    @Test
+    void toMapCorrect()
+    {
+        assertInstanceOf(Map.class, this.dict.toMap());
     }
 
     @Test
