@@ -4,6 +4,7 @@ import interpreter.exceptions.ADTException;
 import interpreter.exceptions.MyException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyList<T> implements IList<T>
 {
@@ -30,6 +31,12 @@ public class MyList<T> implements IList<T>
     public int size()
     {
         return this.list.size();
+    }
+
+    @Override
+    public List<T> toList()
+    {
+        return new ArrayList<>(this.list);
     }
 
     @Override

@@ -7,6 +7,8 @@ import interpreter.exceptions.MyException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class MyStackTest
 {
     private IStack<Integer> stk;
@@ -42,6 +44,13 @@ public class MyStackTest
         assertTrue(s.isEmpty());
 
         assertFalse(stk.isEmpty());
+    }
+
+    @Test
+    void toListCorrect()
+    {
+        assertInstanceOf(List.class, this.stk.toList());
+        assertEquals(List.of(-13, 99, 10), this.stk.toList());
     }
 
     @Test

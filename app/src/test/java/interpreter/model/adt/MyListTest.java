@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class MyListTest
 {
     private IList<IValue> lis;
@@ -59,6 +61,13 @@ public class MyListTest
     void sizeCorrect()
     {
         assertEquals(3, lis.size());
+    }
+
+    @Test
+    void toListCorrect()
+    {
+        assertInstanceOf(List.class, this.lis.toList());
+        assertEquals(List.of(num(10), bool(false), num(30)), this.lis.toList());
     }
 
     @Test
