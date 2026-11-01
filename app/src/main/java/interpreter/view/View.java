@@ -113,7 +113,7 @@ public class View
 
     private IStmt setNewState(IStmt statement)
     {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), statement);
+        PrgState state = PrgState.of(statement);
         IRepository repo = new Repository(state);
         Controller cont = new Controller(repo, true);
         this.controller = cont;

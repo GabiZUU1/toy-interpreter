@@ -3,14 +3,18 @@ package interpreter.model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import interpreter.exceptions.MyException;
+import interpreter.model.adt.IDictionary;
 import interpreter.model.adt.MyDictionary;
 import interpreter.model.adt.MyList;
 import interpreter.model.adt.MyStack;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.stmt.NopStmt;
 import interpreter.model.value.IValue;
+import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.BufferedReader;
 
 public class PrgStateTest
 {
@@ -21,7 +25,7 @@ public class PrgStateTest
     void setUp()
     {
         this.prg = new NopStmt();
-        this.state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), prg);
+        this.state = PrgState.of(this.prg);
     }
 
     @Test
@@ -33,9 +37,17 @@ public class PrgStateTest
         // is the execution stack empty after popping an item out of it
         assertTrue(this.state.getExeStack().isEmpty());
 
-        // are symTable and out empty
+        // are symTable, out and fileTable empty
         assertEquals("{}", this.state.getSymTable().toString());
         assertEquals(0, this.state.getOut().size());
+        assertEquals("{}", this.state.getFileTable().toString());
+    }
+
+    @Test
+    void ofCorrect()
+    {
+        PrgState s = PrgState.of(new NopStmt());
+        assertInstanceOf(PrgState.class, s);
     }
 
     @Test
@@ -63,6 +75,15 @@ public class PrgStateTest
         this.state.setOut(newList);
 
         assertSame(newList, this.state.getOut());
+    }
+
+    @Test
+    void setFileTableCorrect()
+    {
+        MyDictionary<StringValue, BufferedReader> newFileTable = new MyDictionary<>();
+        this.state.setFileTable(newFileTable);
+
+        assertSame(newFileTable, this.state.getFileTable());
     }
 
     @Test

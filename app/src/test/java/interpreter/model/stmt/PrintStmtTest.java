@@ -19,7 +19,7 @@ public class PrintStmtTest
     @BeforeEach
     void setUp()
     {
-        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), Examples.ex1);
+        state = PrgState.of(Examples.ex1);
     }
 
     @Test

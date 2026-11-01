@@ -14,7 +14,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), Examples.ex1);
+        PrgState state = PrgState.of(Examples.ex1);
         IRepository repo = new Repository(state);
         Controller cont = new Controller(repo, true);
         View ui = new View(cont);
