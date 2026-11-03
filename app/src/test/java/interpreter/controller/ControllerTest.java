@@ -20,7 +20,7 @@ public class ControllerTest
     private static PrgState run(IStmt program) throws MyException
     {
         PrgState state = PrgState.of(program);
-        new Controller(new Repository(state), false).allStep(); // display off
+        new Controller(new Repository(state, "testLog.txt"), false).allStep(); // display off
         return state;
     }
 
@@ -55,7 +55,7 @@ public class ControllerTest
     void oneStepOnEmptyStackThrows() throws MyException
     {
         PrgState state = PrgState.of(new NopStmt());
-        Controller controller = new Controller(new Repository(state), false);
+        Controller controller = new Controller(new Repository(state, "testLog.txt"), false);
         state.getExeStack().pop();
 
         var ex = assertThrows(StatementException.class, () -> controller.oneStep(state));

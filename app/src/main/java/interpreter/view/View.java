@@ -126,7 +126,7 @@ public class View
     private IStmt setNewState(IStmt statement)
     {
         PrgState state = PrgState.of(statement);
-        IRepository repo = new Repository(state);
+        IRepository repo = new Repository(state, "log1.txt");
         Controller cont = new Controller(repo, true);
         this.controller = cont;
 

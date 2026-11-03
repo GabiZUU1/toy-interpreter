@@ -11,7 +11,7 @@ import static java.lang.IO.println;
 public class Controller
 {
     IRepository repo;
-    private boolean displayFlag;
+    private final boolean displayFlag;
 
     public Controller(IRepository repo, boolean displayFlag)
     {
@@ -33,11 +33,13 @@ public class Controller
 
     public void allStep() throws MyException
     {
-        PrgState prg = repo.getCrtPrg();
-        display(prg); // only if the display flag is on
+        PrgState prg = this.repo.getCrtPrg();
+        this.repo.logPrgStateExec();
+        display(prg);
         while(!prg.getExeStack().isEmpty())
         {
             oneStep(prg);
+            this.repo.logPrgStateExec();
             display(prg);
         }
     }

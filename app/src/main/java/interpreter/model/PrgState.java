@@ -81,6 +81,19 @@ public class PrgState
     {
         return exeStack + " | " + symTable + " | " + out;
     }
-}
 
-// PrgState state = new PrgState(MyStack<>(), new MyDictionary<>(), new MyList<>(), program);
+    public String toLogString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ExeStack:\n");
+        this.exeStack.toList().forEach(s -> sb.append(s).append("\n"));
+        sb.append("SymTable:\n");
+        this.symTable.toMap().forEach((k, v) -> sb.append(k).append(" --> ").append(v).append("\n"));
+        sb.append("Out:\n");
+        this.out.toList().forEach(v -> sb.append(v).append("\n"));
+        sb.append("FileTable:\n");
+        this.fileTable.toMap().keySet().forEach(k -> sb.append(k.val()).append("\n"));
+
+        return sb.toString();
+    }
+}

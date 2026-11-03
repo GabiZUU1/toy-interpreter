@@ -15,7 +15,7 @@ public class Main
     public static void main(String[] args)
     {
         PrgState state = PrgState.of(Examples.ex1);
-        IRepository repo = new Repository(state);
+        IRepository repo = new Repository(state, "log1.txt");
         Controller cont = new Controller(repo, true);
         View ui = new View(cont);
 
