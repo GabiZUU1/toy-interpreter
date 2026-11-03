@@ -46,7 +46,8 @@ public class Controller
     {
         if(this.displayFlag)
         {
-            println("***************************************");
+            println();
+            //println("*".repeat(state.toString().length()));
             println(state);
         }
     }

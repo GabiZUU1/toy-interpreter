@@ -78,6 +78,8 @@ public class View
             println("1: " + Examples.ex1);
             println("2: " + Examples.ex2);
             println("3: " + Examples.ex3);
+            println("4: " + Examples.ex4);
+            println("5: " + Examples.ex5);
             println("--------------------------------------------");
             print("Choose an program: ");
 
@@ -99,6 +101,16 @@ public class View
                 case 3 ->
                 {
                     this.selected = setNewState(Examples.ex3);
+                    return;
+                }
+                case 4 ->
+                {
+                    this.selected = setNewState(Examples.ex4);
+                    return;
+                }
+                case 5 ->
+                {
+                    this.selected = setNewState(Examples.ex5);
                     return;
                 }
                 default -> this.printMessage("Not a valid option, try again!");
