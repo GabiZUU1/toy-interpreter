@@ -22,7 +22,7 @@ public class VarDeclStmtTest
     @BeforeEach
     void setUp()
     {
-        state = PrgState.of(Examples.ex1);
+        state = PrgState.of(Examples.ex1());
 
         state.getSymTable().put("a", new IntValue(10));
     }

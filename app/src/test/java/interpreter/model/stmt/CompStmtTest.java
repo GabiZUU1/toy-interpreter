@@ -19,7 +19,7 @@ public class CompStmtTest
     @BeforeEach
     void setUp()
     {
-        state = PrgState.of(Examples.ex1);
+        state = PrgState.of(Examples.ex1());
     }
 
     @Test

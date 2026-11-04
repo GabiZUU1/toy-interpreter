@@ -27,7 +27,7 @@ public class ControllerTest
     @Test
     void example1Prints2() throws MyException
     {
-        PrgState st = run(Examples.ex1);
+        PrgState st = run(Examples.ex1());
 
         assertTrue(st.getExeStack().isEmpty());
         assertEquals(new IntValue(2), st.getOut().get(0));

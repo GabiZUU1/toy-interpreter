@@ -17,7 +17,7 @@ import static java.lang.IO.println;
 
 public class View
 {
-    private IStmt selected = Examples.ex1;
+    private IStmt selected = Examples.ex1();
     private Controller controller;
     private final Scanner scanner;
 
@@ -75,11 +75,11 @@ public class View
         {
             println("--------------------------------------------");
             println("0: Go back");
-            println("1: " + Examples.ex1);
-            println("2: " + Examples.ex2);
-            println("3: " + Examples.ex3);
-            println("4: " + Examples.ex4);
-            println("5: " + Examples.ex5);
+            println("1: " + Examples.ex1());
+            println("2: " + Examples.ex2());
+            println("3: " + Examples.ex3());
+            println("4: " + Examples.ex4("test.in"));
+            println("5: " + Examples.ex5());
             println("--------------------------------------------");
             print("Choose an program: ");
 
@@ -90,27 +90,27 @@ public class View
                 case 0 -> {return;}
                 case 1 ->
                 {
-                    this.selected = setNewState(Examples.ex1);
+                    this.selected = setNewState(Examples.ex1());
                     return;
                 }
                 case 2 ->
                 {
-                    this.selected = setNewState(Examples.ex2);
+                    this.selected = setNewState(Examples.ex2());
                     return;
                 }
                 case 3 ->
                 {
-                    this.selected = setNewState(Examples.ex3);
+                    this.selected = setNewState(Examples.ex3());
                     return;
                 }
                 case 4 ->
                 {
-                    this.selected = setNewState(Examples.ex4);
+                    this.selected = setNewState(Examples.ex4("test.in"));
                     return;
                 }
                 case 5 ->
                 {
-                    this.selected = setNewState(Examples.ex5);
+                    this.selected = setNewState(Examples.ex5());
                     return;
                 }
                 default -> this.printMessage("Not a valid option, try again!");
