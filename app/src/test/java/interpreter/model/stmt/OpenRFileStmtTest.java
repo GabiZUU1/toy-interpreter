@@ -5,26 +5,40 @@ import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
 import interpreter.model.exp.IExp;
 import interpreter.model.exp.ValueExp;
+import interpreter.model.type.IntType;
 import interpreter.model.value.IntValue;
 import interpreter.model.value.StringValue;
 import interpreter.view.Examples;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class OpenRFileStmtTest
 {
     private PrgState state;
-    private final String file = "../test.in";
+
+    @TempDir
+    private Path dir;
+    private ValueExp file;
 
     @BeforeEach
-    void setUp()
+    void setUp() throws Exception
     {
-        this.state = PrgState.of(Examples.ex1);
+        this.state = PrgState.of(new NopStmt());
+
+        Path f = this.dir.resolve("numbers.in");
+        Files.writeString(f, "7\n");
+
+        this.file = new ValueExp(new StringValue(f.toString()));
+
+        new VarDeclStmt("a", new IntType()).execute(this.state);
     }
 
     @Test
@@ -37,8 +51,8 @@ public class OpenRFileStmtTest
     @Test
     void fileAlreadyOpenThrows() throws MyException
     {
-        new OpenRFileStmt(new ValueExp(new StringValue(this.file))).execute(this.state);
-        var ex = assertThrows(StatementException.class, () -> new OpenRFileStmt(new ValueExp(new StringValue(this.file))).execute(this.state));
+        new OpenRFileStmt(this.file).execute(this.state);
+        var ex = assertThrows(StatementException.class, () -> new OpenRFileStmt(this.file).execute(this.state));
         assertEquals("openRFile: " + this.file + " is already open", ex.getMessage());
     }
 
@@ -47,6 +61,14 @@ public class OpenRFileStmtTest
     {
         var ex = assertThrows(StatementException.class, () -> new OpenRFileStmt(new ValueExp(new StringValue("ok"))).execute(this.state));
         assertEquals("openRFile: cannot open ok: ok (No such file or directory)", ex.getMessage());
+    }
+
+    @Test
+    void addFileToFileTable() throws MyException
+    {
+        new OpenRFileStmt(this.file).execute(this.state);
+
+        assertTrue(this.state.getFileTable().isDefined(new StringValue(this.file.toString())));
     }
 
     @Test

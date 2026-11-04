@@ -58,6 +58,28 @@ public class RelationalExpTest
     }
 
     @Test
+    void operationsIncorrect() throws MyException
+    {
+        IValue v1 = new RelationalExp(RelOp.LT, nr(9), nr(5)).eval(symTable);
+        assertEquals(new BoolValue(false), v1);
+
+        IValue v2 = new RelationalExp(RelOp.LE, nr(2), nr(1)).eval(symTable);
+        assertEquals(new BoolValue(false), v2);
+
+        IValue v3 = new RelationalExp(RelOp.EQ, nr(1), nr(0)).eval(symTable);
+        assertEquals(new BoolValue(false), v3);
+
+        IValue v4 = new RelationalExp(RelOp.NE, nr(5), nr(5)).eval(symTable);
+        assertEquals(new BoolValue(false), v4);
+
+        IValue v5 = new RelationalExp(RelOp.GT, nr(1), nr(5)).eval(symTable);
+        assertEquals(new BoolValue(false), v5);
+
+        IValue v6 = new RelationalExp(RelOp.GE, nr(4), nr(5)).eval(symTable);
+        assertEquals(new BoolValue(false), v6);
+    }
+
+    @Test
     void toStringCorrect()
     {
         assertEquals("(1 == 0)", new RelationalExp(RelOp.EQ, nr(1), nr(0)).toString());

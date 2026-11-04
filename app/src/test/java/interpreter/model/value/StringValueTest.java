@@ -18,4 +18,14 @@ public class StringValueTest
     {
         assertEquals("buna", new StringValue("buna").toString());
     }
+
+    @Test
+    void stringsAreEqual()
+    {
+        var a = new StringValue("buna");
+        var b = new StringValue("buna");
+
+        assertEquals(a, b);
+        assertEquals(a.hashCode(), b.hashCode());
+    }
 }

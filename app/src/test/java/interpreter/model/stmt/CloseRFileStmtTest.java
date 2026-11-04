@@ -10,15 +10,21 @@ import interpreter.view.Examples;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class CloseRFileStmtTest
 {
     private PrgState state;
-    private final String file = "../test.in";
+
+    @TempDir
+    private Path dir;
+    private ValueExp file;
 
     BufferedReader failingReader = new BufferedReader(new StringReader(""))
     {
@@ -30,9 +36,15 @@ public class CloseRFileStmtTest
     };
 
     @BeforeEach
-    void setUp()
+    void setUp() throws Exception
     {
-        this.state = PrgState.of(Examples.ex1);
+        this.state = PrgState.of(new NopStmt());
+
+        Path f = this.dir.resolve("file.in");
+
+        Files.writeString(f, "7\n");
+
+        this.file = new ValueExp(new StringValue(f.toString()));
     }
 
     @Test
@@ -45,7 +57,7 @@ public class CloseRFileStmtTest
     @Test
     void fileNotOpenThrows()
     {
-        var ex = assertThrows(StatementException.class, () -> new CloseRFileStmt(new ValueExp(new StringValue(this.file))).execute(this.state));
+        var ex = assertThrows(StatementException.class, () -> new CloseRFileStmt(this.file).execute(this.state));
         assertEquals("closeRFile: " + this.file + " is not open", ex.getMessage());
     }
 
@@ -62,15 +74,15 @@ public class CloseRFileStmtTest
     @Test
     void executeCorrect() throws MyException
     {
-        new OpenRFileStmt(new ValueExp(new StringValue(this.file))).execute(this.state);
+        new OpenRFileStmt(this.file).execute(this.state);
 
-        new CloseRFileStmt(new ValueExp(new StringValue(this.file))).execute(this.state);
-        assertTrue(this.state.getSymTable().toMap().isEmpty());
+        new CloseRFileStmt(this.file).execute(this.state);
+        assertTrue(this.state.getFileTable().toMap().isEmpty());
     }
 
     @Test
     void toStringCorrect()
     {
-        assertEquals("closeRFile(" + this.file + ")", new CloseRFileStmt(new ValueExp(new StringValue(this.file))).toString());
+        assertEquals("closeRFile(" + this.file + ")", new CloseRFileStmt(this.file).toString());
     }
 }
