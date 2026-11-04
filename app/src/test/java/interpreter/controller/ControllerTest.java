@@ -36,7 +36,7 @@ public class ControllerTest
     @Test
     void example2Prints18() throws MyException
     {
-        PrgState st = run(Examples.ex2);
+        PrgState st = run(Examples.ex2());
 
         assertTrue(st.getExeStack().isEmpty());
         assertEquals(new IntValue(18), st.getOut().get(0));
@@ -45,7 +45,7 @@ public class ControllerTest
     @Test
     void example3Prints2() throws MyException
     {
-        PrgState st = run(Examples.ex3);
+        PrgState st = run(Examples.ex3());
 
         assertTrue(st.getExeStack().isEmpty());
         assertEquals(new IntValue(2), st.getOut().get(0));
