@@ -92,7 +92,7 @@ public class PrgState
         sb.append("Out:\n");
         this.out.toList().forEach(v -> sb.append(v).append("\n"));
         sb.append("FileTable:\n");
-        this.fileTable.toMap().keySet().forEach(k -> sb.append(k.val()).append("\n"));
+        this.fileTable.toMap().forEach((k, v) -> sb.append(k).append(" --> ").append(v).append("\n"));
 
         return sb.toString();
     }
