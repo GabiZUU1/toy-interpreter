@@ -3,10 +3,7 @@ package interpreter.model;
 import static org.junit.jupiter.api.Assertions.*;
 
 import interpreter.exceptions.MyException;
-import interpreter.model.adt.IDictionary;
-import interpreter.model.adt.MyDictionary;
-import interpreter.model.adt.MyList;
-import interpreter.model.adt.MyStack;
+import interpreter.model.adt.*;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.stmt.NopStmt;
 import interpreter.model.value.IValue;
@@ -84,6 +81,15 @@ public class PrgStateTest
         this.state.setFileTable(newFileTable);
 
         assertSame(newFileTable, this.state.getFileTable());
+    }
+
+    @Test
+    void setHeapCorrect()
+    {
+        MyHeap newHeap = new MyHeap();
+        this.state.setHeap(newHeap);
+
+        assertSame(newHeap, this.state.getHeap());
     }
 
     @Test
