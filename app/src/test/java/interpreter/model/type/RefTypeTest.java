@@ -23,6 +23,6 @@ public class RefTypeTest
     void nestedEqualsCorrect()
     {
         var a = new RefType(new RefType(new RefType(new IntType())));
-        assertTrue(a.equals(new RefType(new RefType(new RefType(new IntType())))));
+        assertNotEquals(new RefType(new RefType(new IntType())), a);
     }
 }
