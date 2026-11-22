@@ -26,7 +26,7 @@ public class ReadHeapExpTest
         this.state = PrgState.of(Examples.ex1());
         new VarDeclStmt("a", new RefType(new IntType())).execute(this.state);
         new VarDeclStmt("b", new IntType()).execute(this.state);
-        new VarDeclStmt("c", new RefType(new IntType())).execute(state);
+        new VarDeclStmt("c", new RefType(new IntType())).execute(this.state);
         new NewStmt("a", new ValueExp(new IntValue(10))).execute(this.state);
     }
 

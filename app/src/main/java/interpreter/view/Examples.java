@@ -4,6 +4,7 @@ import interpreter.model.exp.*;
 import interpreter.model.stmt.*;
 import interpreter.model.type.BoolType;
 import interpreter.model.type.IntType;
+import interpreter.model.type.RefType;
 import interpreter.model.type.StringType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
@@ -74,6 +75,59 @@ public class Examples
                                                                               new PrintStmt(new VarExp("a")),
                                                                               new PrintStmt(new VarExp("b")))))));
     }
+
+    // Ex6: Ref int v; new(v, 20); Ref Ref int a; new(a, v); print(v); print(a)
+    public static IStmt ex6()
+    {
+        return new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                                         new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                                      new CompStmt(new NewStmt("a", new VarExp("v")),
+                                                                   new CompStmt(new PrintStmt(new VarExp("v")),
+                                                                                new PrintStmt(new VarExp("a")))))));
+    }
+
+    // Ex7: Ref int v; new(v, 20); Ref Ref int a; new(a, v); print(rH(v)); print(rH(rH(a)) + 5)
+    public static IStmt ex7()
+    {
+        return new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                                         new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                                      new CompStmt(new NewStmt("a", new VarExp("v")),
+                                                                   new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                                                                new PrintStmt(new ArithExp(ArithOp.ADD,
+                                                                                                           new ReadHeapExp(new ReadHeapExp(new VarExp("a"))),
+                                                                                                           new ValueExp(new IntValue(5)))))))));
+    }
+
+    // Ex8: Ref int v; new(v, 20); print(rH(v)); wH(v, 30); print(rH(v) + 5)
+    public static IStmt ex8()
+    {
+        return new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                                         new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                                      new CompStmt(new WriteHeapStmt("v", new ValueExp(new IntValue(30))),
+                                                                   new PrintStmt(new ArithExp(ArithOp.ADD,
+                                                                                              new ReadHeapExp(new VarExp("v")),
+                                                                                              new ValueExp(new IntValue(5))))))));
+    }
+
+    // Ex9: Ref int v; new(v, 20); Ref Ref int a; new(a, v); new(v, 30); print(rH(rH(a)))
+    public static IStmt ex9()
+    {
+        return new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                                         new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                                      new CompStmt(new NewStmt("a", new VarExp("v")),
+                                                                   new CompStmt(new NewStmt("v", new ValueExp(new IntValue(30))),
+                                                                                new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
+    }
+
+    // Ex10: int v; v = 4; (while (v > 0) (print(v); v = v - 1)); print(v)
+//    public static IStmt ex10()
+//    {
+//        return new CompStmt();
+//    }
 }
 
 
