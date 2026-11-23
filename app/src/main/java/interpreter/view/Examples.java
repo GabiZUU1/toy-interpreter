@@ -131,11 +131,11 @@ public class Examples
                                          new CompStmt(new WhileStmt(new RelationalExp(RelOp.GT,
                                                                                       new VarExp("v"),
                                                                                       new ValueExp(new IntValue(0))),
-                                                                    new AssignStmt("v",
-                                                                                   new ArithExp(ArithOp.SUB,
-                                                                                                new VarExp("v"),
-                                                                                                new ValueExp(new IntValue(1))))),
-                                                      new PrintStmt(new VarExp("v")))));
+                                                                    new CompStmt(new PrintStmt(new VarExp("v")),
+                                                                                 new AssignStmt("v", new ArithExp(ArithOp.SUB,
+                                                                                                                     new VarExp("v"),
+                                                                                                                     new ValueExp(new IntValue(1)))))),
+                                                     new PrintStmt(new VarExp("v")))));
     }
 }
 

@@ -3,9 +3,7 @@ package interpreter.controller;
 import interpreter.model.value.IValue;
 import interpreter.model.value.RefValue;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class GarbageCollector
@@ -34,11 +32,34 @@ public final class GarbageCollector
     {
         Set<Integer> reachable = reachableAddress(symTableAddr, heap);
 
-        return null;
+        return heap.entrySet().stream()
+                .filter(e -> reachable.contains(e.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
     private static Set<Integer> reachableAddress(Set<Integer> roots, Map<Integer, IValue> heap)
     {
-        return null;
+        Set<Integer> reachable = new HashSet<>(roots);
+        boolean changed = true;
+        while(changed)
+        {
+            List<IValue> values = heap.entrySet().stream()
+                    .filter(e -> reachable.contains(e.getKey()))
+                    .map(e -> e.getValue())
+                    .toList();
+
+            Set<Integer> found = getAddrFromSymTable(values);
+            changed = reachable.addAll(found);
+        }
+
+        return reachable;
     }
 }
+
+
+
+
+
+
+
+
