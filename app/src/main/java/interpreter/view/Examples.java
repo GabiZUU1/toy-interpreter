@@ -135,7 +135,7 @@ public class Examples
                                                                                  new AssignStmt("v", new ArithExp(ArithOp.SUB,
                                                                                                                      new VarExp("v"),
                                                                                                                      new ValueExp(new IntValue(1)))))),
-                                                     new PrintStmt(new VarExp("v")))));
+                                                      new PrintStmt(new VarExp("v")))));
     }
 }
 
