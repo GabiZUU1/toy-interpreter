@@ -16,7 +16,8 @@ public class Main
 {
     public static void main(String[] args)
     {
-        List<IStmt> programs = List.of(Examples.ex1(), Examples.ex2(), Examples.ex3(), Examples.ex4("test.in"), Examples.ex5());
+        List<IStmt> programs = List.of(Examples.ex1(), Examples.ex2(), Examples.ex3(), Examples.ex4("test.in"), Examples.ex5(),
+                Examples.ex6(), Examples.ex7(), Examples.ex8(), Examples.ex9(), Examples.ex10());
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "Exit"));
         for(int i = 0; i < programs.size(); i++)

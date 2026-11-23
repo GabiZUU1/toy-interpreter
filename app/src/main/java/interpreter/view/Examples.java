@@ -124,10 +124,19 @@ public class Examples
     }
 
     // Ex10: int v; v = 4; (while (v > 0) (print(v); v = v - 1)); print(v)
-//    public static IStmt ex10()
-//    {
-//        return new CompStmt();
-//    }
+    public static IStmt ex10()
+    {
+        return new CompStmt(new VarDeclStmt("v", new IntType()),
+                            new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(4))),
+                                         new CompStmt(new WhileStmt(new RelationalExp(RelOp.GT,
+                                                                                      new VarExp("v"),
+                                                                                      new ValueExp(new IntValue(0))),
+                                                                    new AssignStmt("v",
+                                                                                   new ArithExp(ArithOp.SUB,
+                                                                                                new VarExp("v"),
+                                                                                                new ValueExp(new IntValue(1))))),
+                                                      new PrintStmt(new VarExp("v")))));
+    }
 }
 
 
